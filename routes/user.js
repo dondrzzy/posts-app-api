@@ -1,6 +1,6 @@
 const express = require('express');
 const userRouter = express.Router();
-const User = require('../models/user');
+const User = require('../models/User');
 
 userRouter.post('/', (req, res) => {
   if (!req.body.email) {
@@ -14,12 +14,10 @@ userRouter.post('/', (req, res) => {
     password: req.body.password,
   });
   console.log(user);
-  user.save((error, result) => {
-    if (error) {
+  user.save((err, result) => {
+    if (err)
       res.json({success: false, error});
-    } else {
-      res.status(201).json({success: true, message: 'User successfully registered'});
-    }
+    res.status(201).json({success: true, message: 'User successfully registered'});
   });
 });
 

@@ -1,2 +1,2 @@
 # posts-app-api
-Simple API with a user and posts module
+Simple Node and Express API with a user and posts module
