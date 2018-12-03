@@ -6,12 +6,19 @@ const User = require('../models/User');
 userRouter.post('/register', (req, res) => {
   if (!req.body.email) {
     res.status(400).json({success:false, message: 'Email is required'});
-  }else if (!req.body.password) {
+  }
+  else if (!req.body.password) {
     res.status(400).json({success:false, message: 'Password is required'});
-  } else {
+  }
+  else if (!req.body.name) {
+    res.status(400).json({success:false, message: 'Name is required'});
+  }
+  else {
     const user = new User({
+      name: req.body.name,
       email: req.body.email,
       password: req.body.password,
+      description: req.body.description,
     });
     console.log(req.body);
     user.save((err, result) => {
