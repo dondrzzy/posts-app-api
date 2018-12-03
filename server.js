@@ -5,6 +5,8 @@ if (process.env.NODE_ENV !== 'production') {
 
 var express = require('express');
 var mongoose = require('mongoose');
+mongoose.Promise = Promise;
+
 var cors = require('cors');
 var bodyParser = require('body-parser');
 var conf = require('./config/database');
@@ -40,7 +42,7 @@ app.get('/posts', (req, res) => {
   res.json({posts});
 });
 
-app.use('/api/v1/user', userRoute);
+app.use('/api/v1/users', userRoute);
 
 app.listen(port, () => {
   console.log('Server started on port ', port);
