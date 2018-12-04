@@ -12,6 +12,7 @@ var bodyParser = require('body-parser');
 var conf = require('./config/database');
 
 var userRoute = require('./routes/user');
+var postsRoute = require('./routes/posts');
 
 var app = express();
 
@@ -38,11 +39,12 @@ var posts = [
 app.use(cors());
 app.use(bodyParser.json());
 
-app.get('/posts', (req, res) => {
-  res.json({posts});
-});
+// app.get('/posts', (req, res) => {
+//   res.json({posts});
+// });
 
 app.use('/api/v1/users', userRoute);
+app.use('/api/v1/posts', postsRoute);
 
 app.listen(port, () => {
   console.log('Server started on port ', port);
