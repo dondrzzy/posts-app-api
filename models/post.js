@@ -4,6 +4,10 @@ const PostSchema = mongoose.Schema({
   message: {
     type: String,
     required: true,
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   }
 });
 

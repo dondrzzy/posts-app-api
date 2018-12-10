@@ -2,7 +2,7 @@ const express = require('express');
 var jwt = require('jsonwebtoken');
 const userRouter = express.Router();
 const bcrypt = require('bcrypt-nodejs');
-const User = require('../models/User');
+const User = require('../models/user');
 
 userRouter.post('/register', (req, res) => {
   if (!req.body.email) {
@@ -40,7 +40,7 @@ userRouter.post('/login', async (req, res) => {
   bcrypt.compare(req.body.password, user.password, (err, result) => {
     if(!result)
       return res.status(401).json({success: false, message: 'Email or password invalid'})
-    const payload = {id: user._id};
+    const payload = {sub: user._id};
     const token = jwt.sign(payload, process.env.SECRET_KEY, {expiresIn:86400});
     return res.status(200).json({success: true, token, email: user.email});
   });
